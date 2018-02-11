@@ -21,6 +21,14 @@ namespace Password_Validation
         private int NumberUpperCase(string str)
         {
             int upperCase = 0;  // The number of uppercase letters
+            List<char> capitalChars = new List<char>();
+            foreach(char stringChar in str)
+            {
+                if(char.IsUpper(stringChar))
+                {
+                    upperCase++;
+                }
+            }
 
             // Count the uppercase characters in str.
             // look at each individual character in the str 
@@ -37,7 +45,13 @@ namespace Password_Validation
             int lowerCase = 0;  // The number of lowercase letters
 
             // Count the lowercase characters in str.
-
+            foreach(char stringChar in str)
+            {
+                if(char.IsLower(stringChar))
+                {
+                    lowerCase++;
+                }
+            }
 
             // Return the number of lowercase characters.
             return lowerCase;
@@ -50,6 +64,13 @@ namespace Password_Validation
             int digits = 0;  // The number of digits
 
             // Count the digits in str.
+            foreach(char stringChar in str)
+            {
+                if(char.IsNumber(stringChar))
+                {
+                    digits++;
+                }
+            }
 
 
             // Return the number of digits.
@@ -62,9 +83,25 @@ namespace Password_Validation
 
             // Get the password from the TextBox.
             string password = passwordTextBox.Text;
+            bool isCorrectPassword = false;
 
             // Validate the password.
-            if (true)
+
+            if(password.Length >= MIN_LENGTH)
+            {
+                if(NumberUpperCase(password) >= 1)
+                {
+                    if(NumberLowerCase(password) >= 1)
+                    {
+                        if(NumberDigits(password) >= 1)
+                        {
+                            isCorrectPassword = true;
+                        }
+                    }
+                }
+            }
+
+            if (isCorrectPassword)
             {
                 MessageBox.Show("The password is valid.");
             }
